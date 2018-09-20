@@ -1,0 +1,49 @@
+package myhello;
+import java.sql.*;
+public class Test {
+	//数据库地址
+	private static String url = "jdbc:mysql://localhost:3306/test?useSSL=true";
+	//用户名
+	private static String user = "root";
+	//密码
+	private static String pwd = "barry.967";
+	//初始化
+	private static Connection conn = null;
+	private static Statement smt = null;
+	
+	public static void main(String[] args) {
+		try {
+			//加载驱动程序
+			Class.forName("com.mysql.jdbc.Driver");
+			//连接数据库
+			conn = DriverManager.getConnection(url,user,pwd);
+			//执行sql语句
+			String sql = "select * from student";
+			smt = conn.createStatement();
+			ResultSet res = smt.executeQuery(sql);
+			//获取结果集
+			while(res.next()) {
+				System.out.println("姓名:  "+res.getString("name"));
+			}
+		}catch(Exception e) {
+			System.out.println(e);
+		}finally{
+			//释放资源
+			if(conn != null) {
+				try {
+					conn.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(smt != null) {
+				try {
+					smt.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+}

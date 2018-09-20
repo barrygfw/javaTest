@@ -1,0 +1,5 @@
+INDEX VERSION 1.4+/home/barry/java/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+3138901685.index
+904809094.index
+1570964937.index
+2060139284.index

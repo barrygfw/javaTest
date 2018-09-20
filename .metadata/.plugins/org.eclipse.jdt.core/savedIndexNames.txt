@@ -1,0 +1,6 @@
+INDEX VERSION 1.131+/home/barry/java/.metadata/.plugins/org.eclipse.jdt.core
+1523845055.index
+646308851.index
+924873903.index
+658476136.index
+3169871680.index

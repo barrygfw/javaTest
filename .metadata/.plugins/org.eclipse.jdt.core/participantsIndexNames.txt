@@ -1,0 +1,17 @@
+INDEX VERSION 1.131
+/home/barry/java/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/4257465314.index
+/seckill/src/main/java
+/home/barry/java/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/692961452.index
+/seckill/src/main/java
+/home/barry/java/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2388527750.index
+/estore/src
+/home/barry/java/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/167432377.index
+/JspChat/src
+/home/barry/java/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/3883231997.index
+/estore/src
+/home/barry/java/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2131679685.index
+/seckill/src/main/java
+/home/barry/java/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1485992797.index
+/ServletAjax/src
+/home/barry/java/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2847849159.index
+/checkcode/src

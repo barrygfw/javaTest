@@ -1,0 +1,81 @@
+package com.SaoLei;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class SaoLei implements ActionListener {
+	JFrame frame = new JFrame("扫雷游戏");	//窗口标题
+	JButton reset = new JButton("重新开始");	//重新开始按钮
+	Container container = new Container();	//扫雷小格子容器
+	
+	//任务3：游戏数据结构
+	// 20行，20列，30个雷
+	final int row = 20;
+	final int col = 20;
+	final int leiCount = 30;
+	JButton[][] buttons = new JButton[row][col];
+	int[][] counts = new int[row][col];
+	final int LEICODE = 10;
+	
+	//构造函数
+	public SaoLei() {
+		//任务1：显示窗口
+		frame.setSize(500,500); //设置窗口大小
+		frame.setResizable(false); //窗口大小不可调整
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout()); //设置布局管理器
+		
+		//任务2：添加重新开始按钮
+		setResetButton();
+		
+		//任务4：画出格子
+		addButtons();
+		
+		frame.setVisible(true);
+	}
+	void setResetButton() {
+		reset.setBackground(Color.green);	//设置背景色
+		reset.setOpaque(true);	//设置是否透明
+		frame.add(reset,BorderLayout.NORTH);	//将按钮加进窗口
+	}
+	
+	void addButtons() {
+		frame.add(container,BorderLayout.CENTER);
+		container.setLayout(new GridLayout(row,col));
+		for(int i=0;i<row;i++) {
+			for(int j=0;j<col;j++) {
+				JButton button = new JButton();
+				button.setText("0");
+				button.addActionListener(this);
+				buttons[i][j] = button;
+				container.add(button);
+			}
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton button = (JButton)e.getSource();
+		if(button.equals(reset)) {
+			
+		}else {
+			button.setBackground(Color.yellow);
+			
+			button.setOpaque(true);
+			button.setEnabled(false);
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		SaoLei lei = new SaoLei();
+	}
+
+}

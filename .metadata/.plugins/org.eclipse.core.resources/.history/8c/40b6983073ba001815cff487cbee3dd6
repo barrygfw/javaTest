@@ -1,0 +1,14 @@
+package myhello;
+
+public class TestEq {
+	public static void main(String[] args) {
+		int a = 1000;
+		int b = 2000;
+		int c = 3000;
+		int c1 = a+b;
+		if(c==c1)
+			System.out.println("==");
+		else
+			System.out.println("!=");
+	}
+}

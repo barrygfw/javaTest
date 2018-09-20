@@ -1,0 +1,171 @@
+package com.SaoLei;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class SaoLei implements ActionListener {
+	JFrame frame = new JFrame("扫雷游戏");	//窗口标题
+	JButton reset = new JButton("重新开始");	//重新开始按钮
+	Container container = new Container();	//扫雷小格子容器
+	
+	//任务3：游戏数据结构
+	// 20行，20列，30个雷
+	final int row = 20;
+	final int col = 20;
+	final int leiCount = 30;
+	JButton[][] buttons = new JButton[row][col];
+	int[][] counts = new int[row][col];
+	final int LEICODE = 10;
+	
+	//构造函数
+	public SaoLei() {
+		//任务1：显示窗口
+		frame.setSize(500,500); //设置窗口大小
+		frame.setResizable(false); //窗口大小不可调整
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout()); //设置布局管理器
+		
+		//任务2：添加重新开始按钮
+		setResetButton();
+		
+		//任务4：画出格子
+		addButtons();
+		
+		//任务6：埋雷
+		addLei();
+		
+		//任务7：添加雷的计算 
+		calcLei();
+		
+		frame.setVisible(true);
+	}
+	void setResetButton() {
+		reset.setBackground(Color.green);	//设置背景色
+		reset.setOpaque(true);	//设置是否透明
+		frame.add(reset,BorderLayout.NORTH);	//将按钮加进窗口
+	}
+	
+	void addButtons() {
+		frame.add(container,BorderLayout.CENTER);
+		container.setLayout(new GridLayout(row,col));
+		for(int i=0;i<row;i++) {
+			for(int j=0;j<col;j++) {
+				JButton button = new JButton();
+				button.setMargin(new Insets(0,0,0,0));
+				//任务5：添加点击事件
+				button.addActionListener(this);
+				buttons[i][j] = button;
+				container.add(button);
+			}
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton button = (JButton)e.getSource();
+		if(button.equals(reset)) {
+			
+		}else {
+			int count = 0;
+			for(int i=0;i<row;i++) {
+				for(int j=0;j<col; j++) {
+					if(button.equals(buttons[i][j])) {
+						count = counts[i][j];
+						if(count == LEICODE) {
+							loseGame();
+						}else {
+							openCell(i,j);
+						}
+						return ;
+					}
+				}
+			}
+		}
+	}
+	
+	void openCell(int i, int j) {
+		//如果格子已经被打开，直接返回
+		if(buttons[i][j].isEnabled() == false) 
+			return ;
+		buttons[i][j].setBackground(Color.yellow);
+		buttons[i][j].setText(counts[i][j] + "");
+		buttons[i][j].setOpaque(true);
+		buttons[i][j].setEnabled(false);
+		if(counts[i][j] == 0) {
+			if(i>0 && j>0 && counts[i-1][j-1] != LEICODE) openCell(i-1,j-1);
+			if(i>0 && counts[i-1][j] != LEICODE) openCell(i-1,j);
+			if(i>0 && j<19 &&counts[i-1][j+1] != LEICODE) openCell(i-1,j+1);
+			if(j>0 && counts[i][j-1] != LEICODE) openCell(i,j-1);
+			if(j<19 && counts[i][j+1] != LEICODE) openCell(i,j+1);
+			if(i<19 && j>0 && counts[i+1][j-1] != LEICODE) openCell(i+1,j-1);
+			if(i<19 && counts[i+1][j] != LEICODE) openCell(i+1,j);
+			if(i<19 && j<19 && counts[i+1][j+1] != LEICODE) openCell(i+1,j+1);
+		}
+		return ;
+	}
+	
+	void addLei() {
+		Random rand = new Random();
+		int randRow, randCol;
+		for(int i=0;i<leiCount;i++) {
+			randRow = rand.nextInt(row);
+			randCol = rand.nextInt(col);
+			if(counts[randRow][randCol] == LEICODE)
+				i--;
+			else {
+				counts[randRow][randCol] = LEICODE;
+			}
+		}
+	}
+	
+	void calcLei() {
+		int count;
+		for(int i=0;i<row;i++) {
+			for(int j=0;j<col;j++) {
+				count = 0;
+				if(counts[i][j] == LEICODE) continue;
+				
+				if(i>0 && j>0 && counts[i-1][j-1] == LEICODE) count++;
+				if(i>0 && counts[i-1][j] == LEICODE) count++;
+				if(i>0 && j<19 &&counts[i-1][j+1] == LEICODE) count++;
+				if(j>0 && counts[i][j-1] == LEICODE) count++;
+				if(j<19 && counts[i][j+1] == LEICODE) count++;
+				if(i<19 && j>0 && counts[i+1][j-1] == LEICODE) count++;
+				if(i<19 && counts[i+1][j] == LEICODE) count++;
+				if(i<19 && j<19 && counts[i+1][j+1] == LEICODE) count++;
+				
+				counts[i][j] = count;
+			}
+		}
+	}
+	
+	void loseGame() {
+		for(int i=0;i<row;i++) {
+			for(int j=0;j<col;j++) {
+				int count = counts[i][j];
+				if(count == LEICODE) {
+					buttons[i][j].setText("X");
+					buttons[i][j].setBackground(Color.red);
+					buttons[i][j].setEnabled(false);
+				}else {
+					buttons[i][j].setText(count + "");
+					buttons[i][j].setEnabled(false);
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		SaoLei lei = new SaoLei();
+	}
+
+}
