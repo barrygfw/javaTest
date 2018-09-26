@@ -8,4 +8,6 @@
     <fullyQualifiedTypeName name="jdbc.dao.IStudentDao"/>
     <fullyQualifiedTypeName name="jdbc.domain.Student"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
 </qualifiedTypeNameHistroy>

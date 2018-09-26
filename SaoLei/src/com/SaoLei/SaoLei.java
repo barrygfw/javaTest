@@ -51,7 +51,7 @@ public class SaoLei implements ActionListener {
 	}
 	//重新开始按钮
 	void setResetButton() {
-		reset.setBackground(Color.green);	//设置背景色
+		reset.setBackground(Color.gray);	//设置背景色
 		reset.setOpaque(true);	//设置是否透明
 		reset.addActionListener(this);
 		frame.add(reset,BorderLayout.NORTH);	//将按钮加进窗口
@@ -111,7 +111,10 @@ public class SaoLei implements ActionListener {
 		if(buttons[i][j].isEnabled() == false) 
 			return ;
 		buttons[i][j].setBackground(Color.yellow);
-		buttons[i][j].setText(counts[i][j] + "");
+		if(counts[i][j] == 0)
+			buttons[i][j].setText("");
+		else
+			buttons[i][j].setText(counts[i][j] + "");
 		buttons[i][j].setOpaque(true);
 		buttons[i][j].setEnabled(false);
 		if(counts[i][j] == 0) {
