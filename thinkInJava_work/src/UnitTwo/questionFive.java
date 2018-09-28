@@ -17,8 +17,11 @@ public class questionFive {
 		System.out.println("my name is "+scruffy.name+" my says :"+scruffy.says);
 	//在练习五的基础上，创建一个新的Dog索引，并对其赋值为spot对象。测试用==和equals()方法来比较所有引用的结果。
 		Dog spot1 = spot;
-		System.out.println("spot和spot1的name："+spot.name==spot1.name);
-		System.out.println("spot和spot1的says："+spot.says==spot1.says);
-		System.out.println("spot和spot1："+spot==spot1);
+		System.out.print("spot和spot1的name用==判断：");System.out.println(spot.name==spot1.name);
+		System.out.print("spot和spot1的says用==判断：");System.out.println(spot.says==spot1.says);
+		System.out.print("spot和spot1用==判断：");System.out.println(spot==spot1);			//报错
+		System.out.print("spot和spot1用equals判断：");System.out.println(spot.equals(spot1));
+		System.out.print("spot和spot1的name用equals判断：");System.out.println(spot.name.equals(spot1.name));
+		System.out.print("spot和spot1的says用equals判断：");System.out.println(spot.says.equals(spot1.says));
 	}
 }
